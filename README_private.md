@@ -58,3 +58,15 @@ npm run typecheck
 |-----------|-------------|
 | `VButton` | `variant`: primary / secondary / ghost · `size`: sm / md / lg |
 | `VInput`  | `v-model`, label, placeholder, type, disabled |
+
+## Publish to npm
+
+When you’re ready:
+
+1. `npm run build`
+2. Confirm `dist/` contains `vas-ui.js`, `index.d.ts`, and `style.css`
+3. Bump `"version"` in `package.json`
+4. `npm login` (if needed)
+5. `npm publish --access public`
+
+Only `dist/` is published (`files` field).
