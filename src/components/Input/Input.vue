@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import type { InputColor, InputSize, InputType, InputVariant } from './types'
+import type { InputColor, InputRules, InputSize, InputType, InputVariant } from './types'
 
 defineOptions({ inheritAttrs: false })
 
@@ -13,6 +13,8 @@ const props = withDefaults(
     size?: InputSize
     label?: string
     floating?: boolean
+    clearable?: boolean
+    rules?: InputRules
     placeholder?: string
     disabled?: boolean
     type?: InputType
@@ -24,6 +26,8 @@ const props = withDefaults(
     size: 'md',
     label: undefined,
     floating: true,
+    clearable: false,
+    rules: () => [(input) => input && input.length > 0 || 'Input is required'],
     placeholder: '',
     disabled: false,
     type: 'text',
@@ -40,8 +44,20 @@ const inputId = computed(
 const isFloating = computed(() => props.floating && !!props.label)
 const isLabelRaised = computed(() => isFloating.value && (focused.value || !!model.value))
 
-const baseClasses =
-  'vas:w-full vas:rounded-vas vas:text-text vas:transition-colors vas:focus-visible:outline-none vas:focus-visible:ring-2 vas:focus-visible:ring-offset-2 vas:disabled:cursor-not-allowed vas:disabled:opacity-50 vas:placeholder:text-text-muted/60'
+function runRules(value: string): string[] {
+  const messages: string[] = []
+  for (const rule of props.rules) {
+    const result = rule(value)
+    if (result === true) continue
+    messages.push(typeof result === 'string' && result ? result : 'Invalid value')
+  }
+  return messages
+}
+
+const errorMessages = computed(() => runRules(model.value))
+const hasError = computed(() => errorMessages.value.length > 0)
+
+const baseClasses = 'vas:w-full vas:rounded-vas vas:text-text vas:transition-colors vas:focus-visible:outline-none vas:focus-visible:ring-2 vas:focus-visible:ring-offset-2 vas:disabled:cursor-not-allowed vas:disabled:opacity-50 vas:placeholder:text-text-muted/60'
 
 const sizeClasses: Record<InputSize, string> = {
   sm: 'vas:h-8 vas:px-3 vas:text-sm',
@@ -123,19 +139,33 @@ const floatingLabelColorClasses: Record<InputColor, string> = {
   dark: 'vas:text-dark',
 }
 
+const showClear = computed(() => props.clearable && !!model.value && !props.disabled)
+
+const clearPaddingClasses: Record<InputSize, string> = {
+  sm: 'vas:pr-8',
+  md: 'vas:pr-9',
+  lg: 'vas:pr-10',
+}
+
+const errorBorderClasses =
+  'vas:border-red-500 vas:focus-visible:ring-red-500 vas:focus-visible:border-red-500'
+
 const inputClasses = computed(() =>
   [
     baseClasses,
-    variantColorClasses[props.variant][props.color],
+    hasError.value ? errorBorderClasses : variantColorClasses[props.variant][props.color],
     isFloating.value ? floatingSizeClasses[props.size] : sizeClasses[props.size],
+    props.clearable ? clearPaddingClasses[props.size] : '',
   ].join(' '),
 )
 
 const floatingLabelClasses = computed(() => {
   const raised = isLabelRaised.value
-  const colorClass = focused.value
-    ? floatingLabelColorClasses[props.color]
-    : 'vas:text-text-muted'
+  const colorClass = hasError.value
+    ? 'vas:text-red-500'
+    : focused.value
+      ? floatingLabelColorClasses[props.color]
+      : 'vas:text-text-muted'
 
   const raisedTop = props.size === 'sm' ? 'vas:top-0.5' : props.size === 'lg' ? 'vas:top-1' : 'vas:top-1'
 
@@ -153,6 +183,18 @@ const floatingLabelClasses = computed(() => {
 const resolvedPlaceholder = computed(() => {
   if (isFloating.value && !isLabelRaised.value) return ' '
   return props.placeholder
+})
+
+function clear() {
+  model.value = ''
+}
+
+function validate() {
+  return runRules(model.value).length === 0
+}
+
+defineExpose({
+  validate,
 })
 </script>
 
@@ -174,6 +216,8 @@ const resolvedPlaceholder = computed(() => {
         :placeholder="resolvedPlaceholder"
         :disabled="disabled"
         :class="inputClasses"
+        :aria-invalid="hasError || undefined"
+        :aria-describedby="hasError ? `${inputId}-error` : undefined"
         v-bind="$attrs"
         @focus="focused = true"
         @blur="focused = false"
@@ -185,6 +229,38 @@ const resolvedPlaceholder = computed(() => {
       >
         {{ label }}
       </label>
+      <button
+        v-if="showClear"
+        type="button"
+        aria-label="Clear input"
+        class="vas:absolute vas:right-2 vas:top-1/2 vas:-translate-y-1/2 vas:inline-flex vas:items-center vas:justify-center vas:rounded-vas vas:p-0.5 vas:text-gray-400 vas:transition-colors vas:hover:text-gray-500 vas:focus-visible:outline-none vas:focus-visible:ring-2 vas:focus-visible:ring-primary vas:cursor-pointer"
+        @mousedown.prevent
+        @click="clear"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="vas:h-4 vas:w-4"
+          aria-hidden="true"
+        >
+          <path
+            d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <div
+      :id="inputId ? `${inputId}-error` : undefined"
+      class="vas:text-xs vas:text-red-500"
+      :class="rules.length ? 'vas:min-h-5' : ''"
+      role="alert"
+      aria-live="polite"
+    >
+      <p v-for="(message, index) in errorMessages" :key="index">
+        {{ message }}
+      </p>
     </div>
   </div>
 </template>

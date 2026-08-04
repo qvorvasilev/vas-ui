@@ -5,7 +5,14 @@ import './styles.css'
 
 export { VButton, VInput }
 export type { ButtonVariant, ButtonSize, ButtonColor } from './components/Button/types'
-export type { InputVariant, InputColor, InputSize, InputType } from './components/Input/types'
+export type {
+  InputVariant,
+  InputColor,
+  InputSize,
+  InputType,
+  InputRule,
+  InputRules,
+} from './components/Input/types'
 
 const components = {
   VButton,
