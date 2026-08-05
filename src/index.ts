@@ -1,32 +1,46 @@
-import type { App, Plugin } from 'vue'
-import { VButton } from './components/Button'
-import { VInput } from './components/Input'
-import './styles.css'
+import type { App, Plugin } from 'vue';
+import { VButton } from './components/Button';
+import { VInput } from './components/Input';
+import { VSelect } from './components/Select';
+import './styles.css';
 
-export { VButton, VInput }
-export type { ButtonVariant, ButtonSize, ButtonColor } from './components/Button/types'
+export { VButton, VInput, VSelect };
+export type { ButtonColor, ButtonSize, ButtonVariant } from './components/Button/types';
 export type {
-  InputVariant,
   InputColor,
-  InputSize,
-  InputType,
   InputRule,
   InputRules,
-} from './components/Input/types'
+  InputSize,
+  InputType,
+  InputVariant,
+} from './components/Input/types';
+export type {
+  SelectColor,
+  SelectItem,
+  SelectItemObject,
+  SelectItems,
+  SelectModelValue,
+  SelectPrimitive,
+  SelectRule,
+  SelectRules,
+  SelectSize,
+  SelectVariant,
+} from './components/Select/types';
 
 const components = {
   VButton,
   VInput,
-} as const
+  VSelect,
+} as const;
 
-export type VasUiComponents = typeof components
+export type VasUiComponents = typeof components;
 
 const VasUi: Plugin = {
   install(app: App) {
     for (const [name, component] of Object.entries(components)) {
-      app.component(name, component)
+      app.component(name, component);
     }
   },
-}
+};
 
-export default VasUi
+export default VasUi;

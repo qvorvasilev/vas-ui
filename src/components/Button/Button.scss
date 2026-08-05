@@ -1,0 +1,272 @@
+.vas-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--vas-font-family);
+  font-weight: var(--vas-font-weight-medium);
+  border-radius: var(--vas-radius);
+  border-style: solid;
+  border-width: 1px;
+  cursor: pointer;
+  transition: var(--vas-transition-colors);
+  box-sizing: border-box;
+
+  &:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 var(--vas-focus-ring-offset) var(--vas-color-white),
+      0 0 0 calc(var(--vas-focus-ring-offset) + var(--vas-focus-ring-width)) var(--vas-color-primary);
+  }
+
+  &:disabled {
+    opacity: var(--vas-disabled-opacity);
+    pointer-events: none;
+  }
+
+  /* Sizes */
+  &--sm {
+    height: var(--vas-control-height-sm);
+    padding-inline: var(--vas-control-padding-x-sm);
+    font-size: var(--vas-font-size-sm);
+  }
+
+  &--md {
+    height: var(--vas-control-height-md);
+    padding-inline: var(--vas-control-padding-x-md);
+    font-size: var(--vas-font-size-sm);
+  }
+
+  &--lg {
+    height: var(--vas-control-height-lg);
+    padding-inline: var(--vas-control-padding-x-lg);
+    font-size: var(--vas-font-size-base);
+  }
+
+  /* Outlined */
+  &--outlined {
+    background-color: var(--vas-color-white);
+
+    &.vas-btn--primary {
+      color: var(--vas-color-primary);
+      border-color: var(--vas-color-primary);
+
+      &:hover {
+        background-color: var(--vas-color-primary);
+        color: var(--vas-color-white);
+      }
+    }
+
+    &.vas-btn--secondary {
+      color: var(--vas-color-secondary);
+      border-color: var(--vas-color-secondary);
+
+      &:hover {
+        background-color: var(--vas-color-secondary);
+        color: var(--vas-color-white);
+      }
+    }
+
+    &.vas-btn--danger {
+      color: var(--vas-color-danger);
+      border-color: var(--vas-color-danger);
+
+      &:hover {
+        background-color: var(--vas-color-danger);
+        color: var(--vas-color-white);
+      }
+    }
+
+    &.vas-btn--success {
+      color: var(--vas-color-success);
+      border-color: var(--vas-color-success);
+
+      &:hover {
+        background-color: var(--vas-color-success);
+        color: var(--vas-color-white);
+      }
+    }
+
+    &.vas-btn--warning {
+      color: var(--vas-color-warning);
+      border-color: var(--vas-color-warning);
+
+      &:hover {
+        background-color: var(--vas-color-warning);
+        color: var(--vas-color-white);
+      }
+    }
+
+    &.vas-btn--info {
+      color: var(--vas-color-info);
+      border-color: var(--vas-color-info);
+
+      &:hover {
+        background-color: var(--vas-color-info);
+        color: var(--vas-color-white);
+      }
+    }
+
+    &.vas-btn--light {
+      color: var(--vas-color-light);
+      border-color: var(--vas-color-light);
+
+      &:hover {
+        background-color: var(--vas-color-light);
+        color: var(--vas-color-white);
+      }
+    }
+
+    &.vas-btn--dark {
+      color: var(--vas-color-dark);
+      border-color: var(--vas-color-dark);
+
+      &:hover {
+        background-color: var(--vas-color-dark);
+        color: var(--vas-color-white);
+      }
+    }
+  }
+
+  /* Filled */
+  &--filled {
+    border-color: transparent;
+    color: var(--vas-color-white);
+
+    &.vas-btn--primary {
+      background-color: var(--vas-color-primary);
+
+      &:hover {
+        background-color: var(--vas-color-primary-hover);
+      }
+    }
+
+    &.vas-btn--secondary {
+      background-color: var(--vas-color-surface);
+      color: var(--vas-color-text);
+      border-color: var(--vas-color-border);
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--vas-color-muted) 40%, transparent);
+      }
+    }
+
+    &.vas-btn--danger {
+      background-color: var(--vas-color-danger);
+
+      &:hover {
+        background-color: var(--vas-color-danger-hover);
+      }
+    }
+
+    &.vas-btn--success {
+      background-color: var(--vas-color-success);
+
+      &:hover {
+        background-color: var(--vas-color-success-hover);
+      }
+    }
+
+    &.vas-btn--warning {
+      background-color: var(--vas-color-warning);
+
+      &:hover {
+        background-color: var(--vas-color-warning-hover);
+      }
+    }
+
+    &.vas-btn--info {
+      background-color: var(--vas-color-info);
+
+      &:hover {
+        background-color: var(--vas-color-info-hover);
+      }
+    }
+
+    &.vas-btn--light {
+      background-color: var(--vas-color-light);
+      color: var(--vas-color-text);
+
+      &:hover {
+        background-color: var(--vas-color-light-hover);
+      }
+    }
+
+    &.vas-btn--dark {
+      background-color: var(--vas-color-dark);
+
+      &:hover {
+        background-color: var(--vas-color-dark-hover);
+      }
+    }
+  }
+
+  /* Text */
+  &--text {
+    background-color: transparent;
+    border-color: transparent;
+
+    &.vas-btn--primary {
+      color: var(--vas-color-primary);
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--vas-color-primary) 10%, transparent);
+      }
+    }
+
+    &.vas-btn--secondary {
+      color: var(--vas-color-secondary);
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--vas-color-secondary) 10%, transparent);
+      }
+    }
+
+    &.vas-btn--danger {
+      color: var(--vas-color-danger);
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--vas-color-danger) 10%, transparent);
+      }
+    }
+
+    &.vas-btn--success {
+      color: var(--vas-color-success);
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--vas-color-success) 10%, transparent);
+      }
+    }
+
+    &.vas-btn--warning {
+      color: var(--vas-color-warning);
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--vas-color-warning) 10%, transparent);
+      }
+    }
+
+    &.vas-btn--info {
+      color: var(--vas-color-info);
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--vas-color-info) 10%, transparent);
+      }
+    }
+
+    &.vas-btn--light {
+      color: var(--vas-color-light);
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--vas-color-light) 10%, transparent);
+      }
+    }
+
+    &.vas-btn--dark {
+      color: var(--vas-color-dark);
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--vas-color-dark) 10%, transparent);
+      }
+    }
+  }
+}

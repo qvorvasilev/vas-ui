@@ -1,5 +1,5 @@
-import type { Preview } from '@storybook/vue3'
-import '../src/styles.css'
+import type { Preview } from '@storybook/vue3';
+import '../src/styles.css';
 
 const preview: Preview = {
   parameters: {
@@ -11,6 +11,6 @@ const preview: Preview = {
     },
     layout: 'centered',
   },
-}
+};
 
-export default preview
+export default preview;

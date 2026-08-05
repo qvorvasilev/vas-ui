@@ -1,0 +1,268 @@
+.vas-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  font-family: var(--vas-font-family);
+
+  &__label {
+    font-size: var(--vas-font-size-sm);
+    font-weight: var(--vas-font-weight-medium);
+    color: var(--vas-color-text);
+  }
+
+  &__field {
+    position: relative;
+  }
+
+  &__control {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: var(--vas-radius);
+    color: var(--vas-color-text);
+    font-family: inherit;
+    transition: var(--vas-transition-colors);
+    border-style: solid;
+    border-width: 1px;
+
+    &::placeholder {
+      color: color-mix(in srgb, var(--vas-color-text-muted) 60%, transparent);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow:
+        0 0 0 var(--vas-focus-ring-offset) var(--vas-color-white),
+        0 0 0 calc(var(--vas-focus-ring-offset) + var(--vas-focus-ring-width))
+          var(--vas-input-focus-color, var(--vas-color-primary));
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: var(--vas-disabled-opacity);
+    }
+  }
+
+  /* Sizes (non-floating) */
+  &--sm .vas-input__control:not(.vas-input__control--floating) {
+    height: var(--vas-control-height-sm);
+    padding-inline: var(--vas-control-padding-x-input);
+    font-size: var(--vas-font-size-sm);
+  }
+
+  &--md .vas-input__control:not(.vas-input__control--floating) {
+    height: var(--vas-control-height-md);
+    padding-inline: var(--vas-control-padding-x-input);
+    font-size: var(--vas-font-size-sm);
+  }
+
+  &--lg .vas-input__control:not(.vas-input__control--floating) {
+    height: var(--vas-control-height-lg);
+    padding-inline: var(--vas-control-padding-x-input);
+    font-size: var(--vas-font-size-base);
+  }
+
+  /* Floating sizes */
+  &--sm .vas-input__control--floating {
+    height: var(--vas-control-height-floating-sm);
+    padding: 1rem var(--vas-control-padding-x-input) 0.25rem;
+    font-size: var(--vas-font-size-sm);
+  }
+
+  &--md .vas-input__control--floating {
+    height: var(--vas-control-height-floating-md);
+    padding: 1.25rem var(--vas-control-padding-x-input) 0.375rem;
+    font-size: var(--vas-font-size-sm);
+  }
+
+  &--lg .vas-input__control--floating {
+    height: var(--vas-control-height-floating-lg);
+    padding: 1.5rem var(--vas-control-padding-x-input) 0.5rem;
+    font-size: var(--vas-font-size-base);
+  }
+
+  /* Clearable padding */
+  &--clearable.vas-input--sm .vas-input__control {
+    padding-inline-end: 2rem;
+  }
+
+  &--clearable.vas-input--md .vas-input__control {
+    padding-inline-end: 2.25rem;
+  }
+
+  &--clearable.vas-input--lg .vas-input__control {
+    padding-inline-end: 2.5rem;
+  }
+
+  /* Color tokens via CSS vars on the root */
+  &--primary {
+    --vas-input-accent: var(--vas-color-primary);
+    --vas-input-focus-color: var(--vas-color-primary);
+  }
+
+  &--secondary {
+    --vas-input-accent: var(--vas-color-secondary);
+    --vas-input-focus-color: var(--vas-color-secondary);
+  }
+
+  &--danger {
+    --vas-input-accent: var(--vas-color-danger);
+    --vas-input-focus-color: var(--vas-color-danger);
+  }
+
+  &--success {
+    --vas-input-accent: var(--vas-color-success);
+    --vas-input-focus-color: var(--vas-color-success);
+  }
+
+  &--warning {
+    --vas-input-accent: var(--vas-color-warning);
+    --vas-input-focus-color: var(--vas-color-warning);
+  }
+
+  &--info {
+    --vas-input-accent: var(--vas-color-info);
+    --vas-input-focus-color: var(--vas-color-info);
+  }
+
+  &--light {
+    --vas-input-accent: var(--vas-color-light);
+    --vas-input-focus-color: var(--vas-color-light);
+  }
+
+  &--dark {
+    --vas-input-accent: var(--vas-color-dark);
+    --vas-input-focus-color: var(--vas-color-dark);
+  }
+
+  /* Variants */
+  &--outlined .vas-input__control {
+    background-color: var(--vas-color-white);
+    border-color: var(--vas-input-accent);
+
+    &:focus-visible {
+      border-color: var(--vas-input-focus-color);
+    }
+  }
+
+  &--filled .vas-input__control {
+    background-color: color-mix(in srgb, var(--vas-input-accent) 10%, transparent);
+    border-color: transparent;
+
+    &:focus-visible {
+      border-color: var(--vas-input-focus-color);
+    }
+  }
+
+  &--text .vas-input__control {
+    background-color: transparent;
+    border-radius: 0;
+    border-width: 0 0 1px;
+    border-color: var(--vas-input-accent);
+    padding-inline: 0;
+
+    &:focus-visible {
+      box-shadow: none;
+      border-color: var(--vas-input-focus-color);
+    }
+  }
+
+  &--text.vas-input--clearable .vas-input__control {
+    padding-inline-end: 2rem;
+  }
+
+  /* Error overrides color accent */
+  &--error {
+    --vas-input-accent: var(--vas-color-error);
+    --vas-input-focus-color: var(--vas-color-error);
+
+    .vas-input__floating-label {
+      color: var(--vas-color-error);
+    }
+  }
+
+  /* Floating label */
+  &__floating-label {
+    pointer-events: none;
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%) scale(1);
+    transform-origin: left center;
+    transition:
+      var(--vas-transition-colors),
+      transform 150ms ease,
+      top 150ms ease;
+    color: var(--vas-color-text-muted);
+    font-size: var(--vas-font-size-sm);
+    margin: 0;
+  }
+
+  &--text .vas-input__floating-label {
+    left: 0;
+  }
+
+  &--lg .vas-input__floating-label {
+    font-size: var(--vas-font-size-base);
+  }
+
+  &__floating-label--focused {
+    color: var(--vas-input-accent);
+  }
+
+  &__floating-label--raised {
+    top: 0.25rem;
+    transform: translateY(0) scale(0.75);
+  }
+
+  &--sm .vas-input__floating-label--raised {
+    top: 0.125rem;
+  }
+
+  &--lg .vas-input__floating-label--raised {
+    top: 0.25rem;
+  }
+
+  /* Clear button */
+  &__clear {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    border-radius: var(--vas-radius);
+    padding: 0.125rem;
+    color: var(--vas-color-clear);
+    cursor: pointer;
+    transition: var(--vas-transition-colors);
+
+    &:hover {
+      color: var(--vas-color-clear-hover);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow:
+        0 0 0 var(--vas-focus-ring-offset) var(--vas-color-white),
+        0 0 0 calc(var(--vas-focus-ring-offset) + var(--vas-focus-ring-width)) var(--vas-color-primary);
+    }
+  }
+
+  &__clear-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  /* Errors */
+  &__errors {
+    font-size: var(--vas-font-size-xs);
+    color: var(--vas-color-error);
+  }
+
+  &__errors--reserved {
+    min-height: 1.25rem;
+  }
+}

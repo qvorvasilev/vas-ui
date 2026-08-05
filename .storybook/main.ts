@@ -1,6 +1,4 @@
-import type { StorybookConfig } from '@storybook/vue3-vite'
-import { mergeConfig } from 'vite'
-import tailwindcss from '@tailwindcss/vite'
+import type { StorybookConfig } from '@storybook/vue3-vite';
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(ts|tsx)'],
@@ -9,11 +7,6 @@ const config: StorybookConfig = {
     name: '@storybook/vue3-vite',
     options: {},
   },
-  async viteFinal(config) {
-    return mergeConfig(config, {
-      plugins: [tailwindcss()],
-    })
-  },
-}
+};
 
-export default config
+export default config;

@@ -1,13 +1,11 @@
-import { resolve } from 'node:path'
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import tailwindcss from '@tailwindcss/vite'
-import dts from 'vite-plugin-dts'
+import { resolve } from 'node:path';
+import vue from '@vitejs/plugin-vue';
+import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
 
 export default defineConfig({
   plugins: [
     vue(),
-    tailwindcss(),
     dts({
       include: ['src'],
       exclude: ['src/**/*.stories.ts'],
@@ -27,15 +25,13 @@ export default defineConfig({
       output: {
         assetFileNames: (assetInfo) => {
           if (assetInfo.name && assetInfo.name.endsWith('.css')) {
-            return 'style.css'
+            return 'style.css';
           }
-          return assetInfo.name ?? 'asset'
+          return assetInfo.name ?? 'asset';
         },
-        globals: {
-          vue: 'Vue',
-        },
+        globals: { vue: 'Vue' },
       },
     },
     cssCodeSplit: false,
   },
-})
+});

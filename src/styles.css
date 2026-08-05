@@ -1,13 +1,59 @@
-@import 'tailwindcss' prefix(vas);
+:root {
+  /* Brand / semantic colors */
+  --vas-color-primary: #0f766e;
+  --vas-color-primary-hover: #0d9488;
+  --vas-color-secondary: #134e4a;
+  --vas-color-danger: #dc2626;
+  --vas-color-danger-hover: #b91c1c;
+  --vas-color-success: #16a34a;
+  --vas-color-success-hover: #15803d;
+  --vas-color-warning: #d97706;
+  --vas-color-warning-hover: #b45309;
+  --vas-color-info: #0284c7;
+  --vas-color-info-hover: #0369a1;
+  --vas-color-light: #94a3b8;
+  --vas-color-light-hover: #64748b;
+  --vas-color-dark: #1e293b;
+  --vas-color-dark-hover: #0f172a;
 
-@theme {
-  --color-primary: #0f766e;
-  --color-primary-hover: #0d9488;
-  --color-secondary: #134e4a;
-  --color-surface: #f0fdfa;
-  --color-border: #99f6e4;
-  --color-muted: #5eead4;
-  --color-text: #134e4a;
-  --color-text-muted: #0f766e;
-  --radius-vas: 0.5rem;
+  /* Surfaces & text */
+  --vas-color-surface: #f0fdfa;
+  --vas-color-border: #99f6e4;
+  --vas-color-muted: #5eead4;
+  --vas-color-text: #134e4a;
+  --vas-color-text-muted: #0f766e;
+  --vas-color-white: #ffffff;
+  --vas-color-error: #ef4444;
+  --vas-color-clear: #9ca3af;
+  --vas-color-clear-hover: #6b7280;
+
+  /* Typography */
+  --vas-font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --vas-font-size-xs: 0.75rem;
+  --vas-font-size-sm: 0.875rem;
+  --vas-font-size-base: 1rem;
+  --vas-font-weight-medium: 500;
+
+  /* Radius & focus */
+  --vas-radius: 0.5rem;
+  --vas-focus-ring-width: 2px;
+  --vas-focus-ring-offset: 2px;
+
+  /* Control sizes */
+  --vas-control-height-sm: 2rem;
+  --vas-control-height-md: 2.5rem;
+  --vas-control-height-lg: 3rem;
+  --vas-control-height-floating-sm: 2.5rem;
+  --vas-control-height-floating-md: 3rem;
+  --vas-control-height-floating-lg: 3.5rem;
+  --vas-control-padding-x-sm: 0.75rem;
+  --vas-control-padding-x-md: 1rem;
+  --vas-control-padding-x-lg: 1.5rem;
+  --vas-control-padding-x-input: 0.75rem;
+
+  /* Motion & states */
+  --vas-transition-colors:
+    color 150ms ease, background-color 150ms ease, border-color 150ms ease, box-shadow 150ms ease, opacity 150ms ease,
+    transform 150ms ease;
+  --vas-disabled-opacity: 0.5;
 }

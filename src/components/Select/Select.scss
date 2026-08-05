@@ -1,0 +1,385 @@
+.vas-select {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  width: 150px;
+  font-family: var(--vas-font-family);
+
+  &__label {
+    font-size: var(--vas-font-size-sm);
+    font-weight: var(--vas-font-weight-medium);
+    color: var(--vas-color-text);
+  }
+
+  &__field {
+    position: relative;
+  }
+
+  &__control {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: var(--vas-radius);
+    color: var(--vas-color-text);
+    font-family: inherit;
+    transition: var(--vas-transition-colors);
+    border-style: solid;
+    border-width: 1px;
+    appearance: none;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: none;
+      box-shadow:
+        0 0 0 var(--vas-focus-ring-offset) var(--vas-color-white),
+        0 0 0 calc(var(--vas-focus-ring-offset) + var(--vas-focus-ring-width))
+          var(--vas-select-focus-color, var(--vas-color-primary));
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: var(--vas-disabled-opacity);
+    }
+  }
+
+  /* Button reset when used as multiple trigger */
+  button.vas-select__control {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    margin: 0;
+  }
+
+  &__value {
+    display: block;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__value--placeholder {
+    color: var(--vas-color-text-muted);
+  }
+
+  /* Sizes (non-floating) */
+  &--sm .vas-select__control:not(.vas-select__control--floating) {
+    height: var(--vas-control-height-sm);
+    padding-block: 0;
+    padding-inline-start: var(--vas-control-padding-x-input);
+    padding-inline-end: 2.25rem;
+    font-size: var(--vas-font-size-sm);
+  }
+
+  &--md .vas-select__control:not(.vas-select__control--floating) {
+    height: var(--vas-control-height-md);
+    padding-block: 0;
+    padding-inline-start: var(--vas-control-padding-x-input);
+    padding-inline-end: 2.25rem;
+    font-size: var(--vas-font-size-sm);
+  }
+
+  &--lg .vas-select__control:not(.vas-select__control--floating) {
+    height: var(--vas-control-height-lg);
+    padding-block: 0;
+    padding-inline-start: var(--vas-control-padding-x-input);
+    padding-inline-end: 2.25rem;
+    font-size: var(--vas-font-size-base);
+  }
+
+  /* Floating sizes */
+  &--sm .vas-select__control--floating {
+    height: var(--vas-control-height-floating-sm);
+    padding-block: 1rem 0.25rem;
+    padding-inline-start: var(--vas-control-padding-x-input);
+    padding-inline-end: 2.25rem;
+    font-size: var(--vas-font-size-sm);
+  }
+
+  &--md .vas-select__control--floating {
+    height: var(--vas-control-height-floating-md);
+    padding-block: 1.25rem 0.375rem;
+    padding-inline-start: var(--vas-control-padding-x-input);
+    padding-inline-end: 2.25rem;
+    font-size: var(--vas-font-size-sm);
+  }
+
+  &--lg .vas-select__control--floating {
+    height: var(--vas-control-height-floating-lg);
+    padding-block: 1.5rem 0.5rem;
+    padding-inline-start: var(--vas-control-padding-x-input);
+    padding-inline-end: 2.25rem;
+    font-size: var(--vas-font-size-base);
+  }
+
+  /* Extra room when clear is present */
+  &--clearable.vas-select--sm .vas-select__control {
+    padding-inline-end: 3.25rem;
+  }
+
+  &--clearable.vas-select--md .vas-select__control {
+    padding-inline-end: 3.5rem;
+  }
+
+  &--clearable.vas-select--lg .vas-select__control {
+    padding-inline-end: 3.75rem;
+  }
+
+  /* Color tokens via CSS vars on the root */
+  &--primary {
+    --vas-select-accent: var(--vas-color-primary);
+    --vas-select-focus-color: var(--vas-color-primary);
+  }
+
+  &--secondary {
+    --vas-select-accent: var(--vas-color-secondary);
+    --vas-select-focus-color: var(--vas-color-secondary);
+  }
+
+  &--danger {
+    --vas-select-accent: var(--vas-color-danger);
+    --vas-select-focus-color: var(--vas-color-danger);
+  }
+
+  &--success {
+    --vas-select-accent: var(--vas-color-success);
+    --vas-select-focus-color: var(--vas-color-success);
+  }
+
+  &--warning {
+    --vas-select-accent: var(--vas-color-warning);
+    --vas-select-focus-color: var(--vas-color-warning);
+  }
+
+  &--info {
+    --vas-select-accent: var(--vas-color-info);
+    --vas-select-focus-color: var(--vas-color-info);
+  }
+
+  &--light {
+    --vas-select-accent: var(--vas-color-light);
+    --vas-select-focus-color: var(--vas-color-light);
+  }
+
+  &--dark {
+    --vas-select-accent: var(--vas-color-dark);
+    --vas-select-focus-color: var(--vas-color-dark);
+  }
+
+  /* Variants */
+  &--outlined .vas-select__control {
+    background-color: var(--vas-color-white);
+    border-color: var(--vas-select-accent);
+
+    &:focus-visible {
+      border-color: var(--vas-select-focus-color);
+    }
+  }
+
+  &--filled .vas-select__control {
+    background-color: color-mix(in srgb, var(--vas-select-accent) 10%, transparent);
+    border-color: transparent;
+
+    &:focus-visible {
+      border-color: var(--vas-select-focus-color);
+    }
+  }
+
+  &--text .vas-select__control {
+    background-color: transparent;
+    border-radius: 0;
+    border-width: 0 0 1px;
+    border-color: var(--vas-select-accent);
+    padding-inline-start: 0;
+    padding-inline-end: 2rem;
+
+    &:focus-visible {
+      box-shadow: none;
+      border-color: var(--vas-select-focus-color);
+    }
+  }
+
+  &--text.vas-select--clearable .vas-select__control {
+    padding-inline-end: 3.25rem;
+  }
+
+  /* Error overrides color accent */
+  &--error {
+    --vas-select-accent: var(--vas-color-error);
+    --vas-select-focus-color: var(--vas-color-error);
+
+    .vas-select__floating-label {
+      color: var(--vas-color-error);
+    }
+  }
+
+  /* Floating label */
+  &__floating-label {
+    pointer-events: none;
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%) scale(1);
+    transform-origin: left center;
+    transition:
+      var(--vas-transition-colors),
+      transform 150ms ease,
+      top 150ms ease;
+    color: var(--vas-color-text-muted);
+    font-size: var(--vas-font-size-sm);
+    margin: 0;
+  }
+
+  &--text .vas-select__floating-label {
+    left: 0;
+  }
+
+  &--lg .vas-select__floating-label {
+    font-size: var(--vas-font-size-base);
+  }
+
+  &__floating-label--focused {
+    color: var(--vas-select-accent);
+  }
+
+  &__floating-label--raised {
+    top: 0.25rem;
+    transform: translateY(0) scale(0.75);
+  }
+
+  &--sm .vas-select__floating-label--raised {
+    top: 0.125rem;
+  }
+
+  &--lg .vas-select__floating-label--raised {
+    top: 0.25rem;
+  }
+
+  /* Dropdown menu */
+  &__menu {
+    position: absolute;
+    z-index: 20;
+    top: calc(100% + 0.25rem);
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 0.25rem;
+    list-style: none;
+    max-height: 15rem;
+    overflow: auto;
+    background-color: var(--vas-color-white);
+    border: 1px solid var(--vas-color-border);
+    border-radius: var(--vas-radius);
+    box-shadow: 0 4px 12px rgb(19 78 74 / 12%);
+  }
+
+  &__option {
+    margin: 0;
+  }
+
+  &:not(.vas-select--multiple) .vas-select__option--selected .vas-select__option-label {
+    background-color: color-mix(in srgb, var(--vas-select-accent) 12%, transparent);
+  }
+
+  &__option-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.625rem;
+    border-radius: calc(var(--vas-radius) - 0.125rem);
+    cursor: pointer;
+    color: var(--vas-color-text);
+    font-size: var(--vas-font-size-sm);
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--vas-select-accent) 10%, transparent);
+    }
+  }
+
+  &__checkbox {
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    accent-color: var(--vas-select-accent);
+    pointer-events: none;
+  }
+
+  &__option-text {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Caret */
+  &__caret {
+    pointer-events: none;
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--vas-color-text-muted);
+    transition: transform 150ms ease;
+  }
+
+  &--open &__caret {
+    transform: translateY(-50%) rotate(180deg);
+  }
+
+  &--clearable &__caret {
+    right: 2rem;
+  }
+
+  &__caret-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  /* Clear button */
+  &__clear {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    border-radius: var(--vas-radius);
+    padding: 0.125rem;
+    color: var(--vas-color-clear);
+    cursor: pointer;
+    transition: var(--vas-transition-colors);
+
+    &:hover {
+      color: var(--vas-color-clear-hover);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow:
+        0 0 0 var(--vas-focus-ring-offset) var(--vas-color-white),
+        0 0 0 calc(var(--vas-focus-ring-offset) + var(--vas-focus-ring-width)) var(--vas-color-primary);
+    }
+  }
+
+  &__clear-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  /* Errors */
+  &__errors {
+    font-size: var(--vas-font-size-xs);
+    color: var(--vas-color-error);
+  }
+
+  &__errors--reserved {
+    min-height: 1.25rem;
+  }
+}

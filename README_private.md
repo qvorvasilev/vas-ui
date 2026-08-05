@@ -1,6 +1,6 @@
 # vas-ui
 
-Vue 3 component library built with TypeScript and Tailwind CSS.
+Vue 3 component library built with TypeScript, CSS variables, and SCSS.
 
 ## Install
 
@@ -15,33 +15,47 @@ Peer dependency: `vue` `^3.5`.
 Import components and the library stylesheet once in your app entry:
 
 ```ts
-import { createApp } from 'vue'
-import App from './App.vue'
-import { VButton, VInput } from 'vas-ui'
-import 'vas-ui/style.css'
+import { VButton, VInput } from 'vas-ui';
+import { createApp } from 'vue';
+import App from './App.vue';
+import 'vas-ui/style.css';
 
-createApp(App).component('VButton', VButton).component('VInput', VInput).mount('#app')
+createApp(App).component('VButton', VButton).component('VInput', VInput).mount('#app');
 ```
 
 Or register everything via the plugin:
 
 ```ts
-import { createApp } from 'vue'
-import App from './App.vue'
-import VasUi from 'vas-ui'
-import 'vas-ui/style.css'
+import VasUi from 'vas-ui';
+import { createApp } from 'vue';
+import App from './App.vue';
+import 'vas-ui/style.css';
 
-createApp(App).use(VasUi).mount('#app')
+createApp(App).use(VasUi).mount('#app');
 ```
 
 ```vue
 <template>
-  <VButton variant="primary">Save</VButton>
+  <VButton variant="outlined" color="primary">
+    Save
+  </VButton>
   <VInput v-model="email" label="Email" placeholder="you@example.com" />
 </template>
 ```
 
-> Always import `vas-ui/style.css`. Styles are prebuilt Tailwind CSS with a `vas-` utility prefix so they won’t clash with your app’s Tailwind setup.
+> Always import `vas-ui/style.css`. It ships design tokens (`--vas-*` CSS variables) and component styles under a `vas-` class prefix so they won’t clash with your app.
+
+### Theming
+
+Override tokens on `:root` (or a parent) before or after importing the stylesheet:
+
+```css
+:root {
+  --vas-color-primary: #2563eb;
+  --vas-color-primary-hover: #1d4ed8;
+  --vas-radius: 0.375rem;
+}
+```
 
 ## Develop
 
@@ -56,8 +70,8 @@ npm run typecheck
 
 | Component | Description |
 |-----------|-------------|
-| `VButton` | `variant`: primary / secondary / ghost · `size`: sm / md / lg |
-| `VInput`  | `v-model`, label, placeholder, type, disabled |
+| `VButton` | `variant`: outlined / filled / text · `color`: primary / secondary / danger / success / warning / info / light / dark · `size`: sm / md / lg |
+| `VInput`  | `v-model`, `variant`, `color`, `size`, label, floating label, clearable, rules, placeholder, type, disabled |
 
 ## Publish to npm
 

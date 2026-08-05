@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/vue3'
-import { ref } from 'vue'
-import { VInput } from './index'
-import type { InputRule } from './types'
+import type { Meta, StoryObj } from '@storybook/vue3';
+import type { InputRule } from './types';
+import { ref } from 'vue';
+import { VInput } from './index';
 
 const meta = {
   title: 'Components/Input',
@@ -41,93 +41,93 @@ const meta = {
     disabled: false,
     type: 'email',
   },
-} satisfies Meta<typeof VInput>
+} satisfies Meta<typeof VInput>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Outlined: Story = {
-  render: (args) => ({
+  render: args => ({
     components: { VInput },
     setup() {
-      const model = ref('')
-      return { args, model }
+      const model = ref('');
+      return { args, model };
     },
     template: '<VInput v-bind="args" v-model="model" />',
   }),
-}
+};
 
 export const FloatingLabel: Story = {
   args: { floating: true, placeholder: '' },
-  render: (args) => ({
+  render: args => ({
     components: { VInput },
     setup() {
-      const model = ref('')
-      return { args, model }
+      const model = ref('');
+      return { args, model };
     },
     template: '<VInput v-bind="args" v-model="model" />',
   }),
-}
+};
 
 export const Filled: Story = {
   args: { variant: 'filled' },
-  render: (args) => ({
+  render: args => ({
     components: { VInput },
     setup() {
-      const model = ref('')
-      return { args, model }
+      const model = ref('');
+      return { args, model };
     },
     template: '<VInput v-bind="args" v-model="model" />',
   }),
-}
+};
 
 export const Text: Story = {
   args: { variant: 'text' },
-  render: (args) => ({
+  render: args => ({
     components: { VInput },
     setup() {
-      const model = ref('')
-      return { args, model }
+      const model = ref('');
+      return { args, model };
     },
     template: '<VInput v-bind="args" v-model="model" />',
   }),
-}
+};
 
 export const WithoutLabel: Story = {
   args: { label: undefined, placeholder: 'Search…' },
-  render: (args) => ({
+  render: args => ({
     components: { VInput },
     setup() {
-      const model = ref('')
-      return { args, model }
+      const model = ref('');
+      return { args, model };
     },
     template: '<VInput v-bind="args" v-model="model" />',
   }),
-}
+};
 
 export const Disabled: Story = {
   args: { disabled: true, placeholder: 'Disabled' },
-  render: (args) => ({
+  render: args => ({
     components: { VInput },
     setup() {
-      const model = ref('Cannot edit')
-      return { args, model }
+      const model = ref('Cannot edit');
+      return { args, model };
     },
     template: '<VInput v-bind="args" v-model="model" />',
   }),
-}
+};
 
 export const Clearable: Story = {
   args: { clearable: true },
-  render: (args) => ({
+  render: args => ({
     components: { VInput },
     setup() {
-      const model = ref('Clear me')
-      return { args, model }
+      const model = ref('Clear me');
+      return { args, model };
     },
     template: '<VInput v-bind="args" v-model="model" />',
   }),
-}
+};
 
 export const WithValidation: Story = {
   args: {
@@ -135,19 +135,19 @@ export const WithValidation: Story = {
     type: 'email',
     clearable: true,
   },
-  render: (args) => ({
+  render: args => ({
     components: { VInput },
     setup() {
-      const model = ref('')
+      const model = ref('');
       const rules: InputRule[] = [
-        (v) => !!v || 'This field is required',
-        (v) => /.+@.+\..+/.test(v) || 'Please enter a valid email',
-      ]
-      return { args, model, rules }
+        v => !!v || 'This field is required',
+        v => /.[^\n\r@\u2028\u2029]*@.+\..+/.test(v) || 'Please enter a valid email',
+      ];
+      return { args, model, rules };
     },
     template: '<VInput v-bind="args" v-model="model" :rules="rules" />',
   }),
-}
+};
 
 export const Password: Story = {
   args: {
@@ -155,12 +155,12 @@ export const Password: Story = {
     type: 'password',
     placeholder: '••••••••',
   },
-  render: (args) => ({
+  render: args => ({
     components: { VInput },
     setup() {
-      const model = ref('')
-      return { args, model }
+      const model = ref('');
+      return { args, model };
     },
     template: '<VInput v-bind="args" v-model="model" />',
   }),
-}
+};
