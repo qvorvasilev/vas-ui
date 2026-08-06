@@ -1,0 +1,98 @@
+.vas-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  font-family: var(--vas-font-family);
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgb(15 23 42 / 45%);
+  }
+
+  &__panel {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-height: min(90vh, 40rem);
+    overflow: auto;
+    box-sizing: border-box;
+
+    &--chrome {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--vas-color-white);
+      color: var(--vas-color-text);
+      border-radius: var(--vas-radius);
+      border: 1px solid color-mix(in srgb, var(--vas-color-border) 55%, transparent);
+      box-shadow:
+        0 10px 15px -3px rgb(19 78 74 / 12%),
+        0 4px 6px -4px rgb(19 78 74 / 10%);
+    }
+
+    &--raw {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      overflow: visible;
+    }
+  }
+
+  &__title {
+    padding: 1.25rem 1.25rem 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--vas-color-text);
+  }
+
+  &__body {
+    padding: 0.75rem 1.25rem 1rem;
+    font-size: var(--vas-font-size-sm);
+    line-height: 1.55;
+    color: var(--vas-color-text-muted);
+  }
+
+  &__title + &__body {
+    padding-top: 0.5rem;
+  }
+
+  &:not(:has(.vas-dialog__title)) .vas-dialog__body {
+    padding-top: 1.25rem;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 0 1rem 1rem;
+  }
+}
+
+.vas-dialog-enter-active,
+.vas-dialog-leave-active {
+  transition: opacity 180ms ease;
+
+  .vas-dialog__panel {
+    transition:
+      opacity 180ms ease,
+      transform 180ms ease;
+  }
+}
+
+.vas-dialog-enter-from,
+.vas-dialog-leave-to {
+  opacity: 0;
+
+  .vas-dialog__panel {
+    opacity: 0;
+    transform: translateY(0.5rem) scale(0.98);
+  }
+}

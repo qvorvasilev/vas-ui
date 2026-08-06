@@ -1,0 +1,84 @@
+@use 'sass:math';
+
+@mixin vas-col-size($prefix, $n) {
+  .vas-col--#{$prefix}-#{$n} {
+    flex: 0 0 math.percentage(math.div($n, 12));
+    max-width: math.percentage(math.div($n, 12));
+    width: 100%;
+  }
+}
+
+@mixin vas-col-auto($prefix) {
+  .vas-col--#{$prefix}-auto {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 100%;
+  }
+}
+
+@mixin vas-col-breakpoint($prefix) {
+  @for $i from 1 through 12 {
+    @include vas-col-size($prefix, $i);
+  }
+
+  @include vas-col-auto($prefix);
+}
+
+.vas-row {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  margin: calc(var(--vas-grid-gutter) / -2);
+
+  &--dense {
+    margin: calc(var(--vas-grid-gutter-dense) / -2);
+
+    > .vas-col {
+      padding: calc(var(--vas-grid-gutter-dense) / 2);
+    }
+  }
+
+  &--no-gutters {
+    margin: 0;
+
+    > .vas-col {
+      padding: 0;
+    }
+  }
+}
+
+.vas-col {
+  box-sizing: border-box;
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding: calc(var(--vas-grid-gutter) / 2);
+  width: 100%;
+  max-width: 100%;
+}
+
+@include vas-col-breakpoint('cols');
+
+@media (min-width: 480px) {
+  @include vas-col-breakpoint('xs');
+}
+
+@media (min-width: 600px) {
+  @include vas-col-breakpoint('sm');
+}
+
+@media (min-width: 960px) {
+  @include vas-col-breakpoint('md');
+}
+
+@media (min-width: 1280px) {
+  @include vas-col-breakpoint('lg');
+}
+
+@media (min-width: 1920px) {
+  @include vas-col-breakpoint('xl');
+}
+
+@media (min-width: 2560px) {
+  @include vas-col-breakpoint('xxl');
+}

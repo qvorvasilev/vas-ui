@@ -72,3 +72,10 @@ npm run typecheck
 |-----------|-------------|
 | `VButton` | `variant`: outlined / filled / text · `color`: primary / secondary / danger / success / warning / info / light / dark · `size`: sm / md / lg |
 | `VInput`  | `v-model`, `variant`, `color`, `size`, label, floating label, clearable, rules, placeholder, type, disabled |
+| `VSwitch` | `v-model`, required `label`, `true-value` / `false-value` (default `true` / `false`), `color`, `size`, disabled |
+| `VCheckbox` | `v-model` as `boolean` or `array`, `true-value` (default `true`), `false-value` (default `false`), `label`, `color`, `size`, disabled |
+| `VRadio` / `VRadioGroup` | `VRadio` has required `value`; use alone with shared `v-model`, or wrap in `VRadioGroup` (group owns `v-model`, `label`, `direction`, `color`, `size`) |
+| `VCard` | slots: `title`, `body`, `actions` · optional `title` prop · `variant`: elevated / outlined / flat |
+| `VDialog` | `v-model`, `activator` slot, `title` / `body` / `actions` (or default slot), `persistent`, `max-width` |
+| `VTooltip` | `text` or default slot, `activator` slot, `location` (top / bottom / left / right / start / end), `disabled`, delays |
+| `VRow` / `VCol` | 12-col flex grid · `VCol` `cols` (default 12) + `xs`/`sm`/`md`/`lg`/`xl`/`xxl` · `VRow` `no-gutters`, `dense` |

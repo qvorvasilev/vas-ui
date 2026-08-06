@@ -56,4 +56,14 @@
     color 150ms ease, background-color 150ms ease, border-color 150ms ease, box-shadow 150ms ease, opacity 150ms ease,
     transform 150ms ease;
   --vas-disabled-opacity: 0.5;
+
+  /* Grid */
+  --vas-grid-gutter: 24px;
+  --vas-grid-gutter-dense: 12px;
+  --vas-breakpoint-xs: 480px;
+  --vas-breakpoint-sm: 600px;
+  --vas-breakpoint-md: 960px;
+  --vas-breakpoint-lg: 1280px;
+  --vas-breakpoint-xl: 1920px;
+  --vas-breakpoint-xxl: 2560px;
 }

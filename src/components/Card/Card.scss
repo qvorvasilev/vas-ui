@@ -1,0 +1,64 @@
+.vas-card {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  font-family: var(--vas-font-family);
+  color: var(--vas-color-text);
+  background-color: var(--vas-color-white);
+  border-radius: var(--vas-radius);
+  overflow: hidden;
+
+  &--elevated {
+    border: 1px solid color-mix(in srgb, var(--vas-color-border) 55%, transparent);
+    box-shadow:
+      0 1px 2px rgb(19 78 74 / 6%),
+      0 4px 12px rgb(19 78 74 / 8%);
+  }
+
+  &--outlined {
+    border: 1px solid var(--vas-color-border);
+    box-shadow: none;
+  }
+
+  &--flat {
+    border: 1px solid transparent;
+    background-color: var(--vas-color-surface);
+    box-shadow: none;
+  }
+
+  &__title {
+    padding: 1rem 1.25rem 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--vas-color-text);
+  }
+
+  &__body {
+    padding: 0.75rem 1.25rem 1rem;
+    font-size: var(--vas-font-size-sm);
+    line-height: 1.55;
+    color: var(--vas-color-text-muted);
+    flex: 1 1 auto;
+  }
+
+  &__title + &__body {
+    padding-top: 0.5rem;
+  }
+
+  &:not(:has(.vas-card__title)) .vas-card__body {
+    padding-top: 1rem;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1rem 1rem;
+  }
+
+  &:not(:has(.vas-card__body)):not(:has(.vas-card__title)) .vas-card__actions {
+    padding-top: 1rem;
+  }
+}
