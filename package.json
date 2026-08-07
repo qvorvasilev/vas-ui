@@ -1,6 +1,6 @@
 {
   "name": "vas-ui",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Vue 3 component library styled with CSS variables and SCSS",
   "type": "module",
   "author": "Yavor Vasilev",

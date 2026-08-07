@@ -43,6 +43,28 @@ createApp(App).use(VasUi).mount('#app');
 </template>
 ```
 
+### Notifications
+
+Mount the host once (e.g. in your root layout), then push toasts from anywhere:
+
+```vue
+<!-- App.vue / layout -->
+<template>
+  <VNotificationHost />
+  <!-- app content -->
+</template>
+```
+
+```ts
+import { notify } from 'vas-ui';
+
+notify({ type: 'success', text: 'Saved.' });
+notify({ type: 'error', text: 'Something went wrong.', duration: 5000 });
+notify({ type: 'warning', text: 'Sticky until click.', duration: 0 });
+```
+
+Up to 3 are visible at once; extras wait in the queue. Click (or Enter/Space) dismisses early. Default duration is 3s.
+
 > Always import `vas-ui/style.css`. It ships design tokens (`--vas-*` CSS variables) and component styles under a `vas-` class prefix so they won’t clash with your app.
 
 ### Theming
@@ -78,4 +100,5 @@ npm run typecheck
 | `VCard` | slots: `title`, `body`, `actions` · optional `title` prop · `variant`: elevated / outlined / flat |
 | `VDialog` | `v-model`, `activator` slot, `title` / `body` / `actions` (or default slot), `persistent`, `max-width` |
 | `VTooltip` | `text` or default slot, `activator` slot, `location` (top / bottom / left / right / start / end), `disabled`, delays |
+| `VNotification` / `VNotificationHost` | toast messages · mount `VNotificationHost` once · call `notify({ type, text, duration? })` · click to dismiss · max 3 visible (queued) |
 | `VRow` / `VCol` | 12-col flex grid · `VCol` `cols` (default 12) + `xs`/`sm`/`md`/`lg`/`xl`/`xxl` · `VRow` `no-gutters`, `dense` |

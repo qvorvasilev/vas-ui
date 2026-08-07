@@ -5,6 +5,14 @@ import { VCheckbox } from './components/Checkbox';
 import { VDialog } from './components/Dialog';
 import { VCol, VRow } from './components/Grid';
 import { VInput } from './components/Input';
+import {
+  clearNotifications,
+  dismissNotification,
+  notify,
+  useNotificationQueue,
+  VNotification,
+  VNotificationHost,
+} from './components/Notification';
 import { VRadio, VRadioGroup } from './components/Radio';
 import { VSelect } from './components/Select';
 import { VSwitch } from './components/Switch';
@@ -12,12 +20,18 @@ import { VTooltip } from './components/Tooltip';
 import './styles.css';
 
 export {
+  clearNotifications,
+  dismissNotification,
+  notify,
+  useNotificationQueue,
   VButton,
   VCard,
   VCheckbox,
   VCol,
   VDialog,
   VInput,
+  VNotification,
+  VNotificationHost,
   VRadio,
   VRadioGroup,
   VRow,
@@ -43,6 +57,12 @@ export type {
   InputType,
   InputVariant,
 } from './components/Input/types';
+export type {
+  NotificationItem,
+  NotificationPosition,
+  NotificationType,
+  NotifyOptions,
+} from './components/Notification/types';
 export type {
   RadioColor,
   RadioGroupDirection,
@@ -71,6 +91,8 @@ const components = {
   VCol,
   VDialog,
   VInput,
+  VNotification,
+  VNotificationHost,
   VRadio,
   VRadioGroup,
   VRow,
